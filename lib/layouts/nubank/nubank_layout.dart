@@ -157,11 +157,11 @@ class NubankLayout extends StatelessWidget {
                           SizedBox(width: 8),
                           Option(label: 'Pagar', icon: FontAwesomeIcons.barcode,),
                           SizedBox(width: 8),
-                          Option(label: 'Teste', icon: Icons.person,),
+                          Option(label: 'Bloquear cartão', icon: Icons.lock,),
                           SizedBox(width: 8),
-                          Option(label: 'Teste', icon: Icons.person,),
+                          Option(label: 'Me ajuda', icon: Icons.help_outline,),
                           SizedBox(width: 8),
-                          Option(label: 'Teste', icon: Icons.person,),
+                          Option(label: 'Ajustar controles', icon: Icons.control_point,),
                           SizedBox(width: 8),
                         ],
                       ),
@@ -219,7 +219,7 @@ class Option extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 80,
-      height: 100,
+      height: 90,
       color: Color(0xFF9645ac),
       child: Padding(
         padding: const EdgeInsets.all(6),
