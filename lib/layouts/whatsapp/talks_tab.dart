@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import 'chat.dart';
+import 'package:flutter_layouts/shared/chat.dart';
 
 class TalksTab extends StatelessWidget {
   @override
