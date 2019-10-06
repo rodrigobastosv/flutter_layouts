@@ -5,10 +5,17 @@ import 'calls.dart';
 class CallsTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
-      itemBuilder: (context, index) => CallTabItem(call: callData[index]),
-      separatorBuilder: (context, index) => Divider(),
-      itemCount: callData.length,
+    return Scaffold(
+      body: ListView.separated(
+        itemBuilder: (context, index) => CallTabItem(call: callData[index]),
+        separatorBuilder: (context, index) => Divider(),
+        itemCount: callData.length,
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: Icon(Icons.add_call),
+        backgroundColor: Color(0xFF17d825),
+      ),
     );
   }
 }

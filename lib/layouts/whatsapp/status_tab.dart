@@ -44,7 +44,7 @@ class StatusTabItem extends StatelessWidget {
         backgroundImage: NetworkImage(status.imageUrl),
       ),
       title: Text(myStatus ? 'Meu status' : status.name, style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
-      subtitle: Text(status.time, style: TextStyle(color: Colors.black)),
+      subtitle: Text(myStatus ? 'Toque para atualizar seu status' : status.time, style: TextStyle(color: Colors.black)),
       trailing: myStatus ? Icon(Icons.more_horiz, color: Colors.black,) : null,
     );
   }
