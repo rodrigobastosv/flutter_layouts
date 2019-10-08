@@ -1,6 +1,7 @@
 import 'package:flutter_layouts/layouts/nubank/nubank_layout.dart';
 import 'package:flutter_layouts/layouts/whatsapp/whatsapp_layout.dart';
 
+import 'layouts/gmail/gmail_layout.dart';
 import 'layouts/telegram/telegram_layout.dart';
 
 final layouts = [
@@ -15,5 +16,9 @@ final layouts = [
   {
     'icon': 'assets/logo_telegram.jpg',
     'layout': TelegramLayout()
+  },
+  {
+    'icon': 'assets/gmail_logo.jpeg',
+    'layout': GmailLayout()
   },
 ];
