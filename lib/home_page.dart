@@ -24,7 +24,7 @@ class FlutterLayouts extends StatelessWidget {
       child: GridView.builder(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 4,
-          mainAxisSpacing: 10,
+          mainAxisSpacing: 30,
           crossAxisSpacing: 10,
         ),
         itemBuilder: (context, index) {

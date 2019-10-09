@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_layouts/components/codeview_page.dart';
 
 import 'menu.dart';
 import 'talks.dart';
@@ -15,6 +16,8 @@ class _TelegramLayoutState extends State<TelegramLayout>
   AnimationController controller;
   Animation<Offset> offsetAnimation;
 
+  final pageController = PageController();
+
   @override
   void initState() {
     super.initState();
@@ -26,96 +29,102 @@ class _TelegramLayoutState extends State<TelegramLayout>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Telegram',
-          style: TextStyle(fontSize: 22),
-        ),
-        actions: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(right: 8),
-            child: Icon(Icons.search),
-          ),
-        ],
-        backgroundColor: Color(0xFF527da3),
-      ),
-      drawer: Drawer(
-        child: ListView(
-          children: <Widget>[
-            Stack(
-              children: <Widget>[
-                Column(
-            children: <Widget>[
-              UserAccountsDrawerHeader(
-                decoration: BoxDecoration(color: Color(0xFF527da3)),
-                currentAccountPicture: CircleAvatar(
-                  backgroundImage: AssetImage('assets/rod.jpeg'),
-                ),
-                accountName: Text("Rodrigo Bastos"),
-                accountEmail: Text("rodrigobastosv@gmail.com"),
-                onDetailsPressed: () {
-                  if (isDetailsDrawerOpen) {
-                    controller.reverse();
-                  } else {
-                    controller.forward();
-                  }
-                  setState(() => isDetailsDrawerOpen = !isDetailsDrawerOpen);
-                },
+    return PageView(
+      controller: pageController,
+      children: <Widget>[
+        Scaffold(
+          appBar: AppBar(
+            title: Text(
+              'Telegram',
+              style: TextStyle(fontSize: 22),
+            ),
+            actions: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(right: 8),
+                child: Icon(Icons.search),
               ),
-              isDetailsDrawerOpen ? SlideTransition(
-                position: offsetAnimation,
-                child: Column(
+            ],
+            backgroundColor: Color(0xFF527da3),
+          ),
+          drawer: Drawer(
+            child: ListView(
+              children: <Widget>[
+                Stack(
                   children: <Widget>[
-                    ListTile(
-                      leading: CircleAvatar(
-                        backgroundImage: AssetImage('assets/rod.jpeg'),
-                      ),
-                      title: Text("Rodrigo Bastos"),
-                    ),
-                    ListTile(
-                      leading: Icon(Icons.add),
-                      title: Text("Adicionar Conta"),
-                    ),
-                    Divider(),
+                    Column(
+                      children: <Widget>[
+                        UserAccountsDrawerHeader(
+                          decoration: BoxDecoration(color: Color(0xFF527da3)),
+                          currentAccountPicture: CircleAvatar(
+                            backgroundImage: AssetImage('assets/rod.jpeg'),
+                          ),
+                          accountName: Text("Rodrigo Bastos"),
+                          accountEmail: Text("rodrigobastosv@gmail.com"),
+                          onDetailsPressed: () {
+                            if (isDetailsDrawerOpen) {
+                              controller.reverse();
+                            } else {
+                              controller.forward();
+                            }
+                            setState(() => isDetailsDrawerOpen = !isDetailsDrawerOpen);
+                          },
+                        ),
+                        isDetailsDrawerOpen ? SlideTransition(
+                          position: offsetAnimation,
+                          child: Column(
+                            children: <Widget>[
+                              ListTile(
+                                leading: CircleAvatar(
+                                  backgroundImage: AssetImage('assets/rod.jpeg'),
+                                ),
+                                title: Text("Rodrigo Bastos"),
+                              ),
+                              ListTile(
+                                leading: Icon(Icons.add),
+                                title: Text("Adicionar Conta"),
+                              ),
+                              Divider(),
+                            ],
+                          ),
+                        ) : Container(),
+                      ],
+                    )
+
                   ],
                 ),
-              ) : Container(),
-          ],
-        )
-
+                ListView.builder(
+                    shrinkWrap: true,
+                    physics: ClampingScrollPhysics(),
+                    itemBuilder: (context, index) {
+                      final menu = menuItems[index];
+                      return ListTile(
+                          leading: Icon(menu.icon), title: Text(menu.nome));
+                    },
+                    itemCount: 3),
+                Divider(),
+                ListView.builder(
+                    shrinkWrap: true,
+                    physics: ClampingScrollPhysics(),
+                    itemBuilder: (context, index) {
+                      final menu = menuItems[index + 3];
+                      return ListTile(
+                          leading: Icon(menu.icon), title: Text(menu.nome));
+                    },
+                    itemCount: 6),
               ],
             ),
-            ListView.builder(
-                shrinkWrap: true,
-                physics: ClampingScrollPhysics(),
-                itemBuilder: (context, index) {
-                  final menu = menuItems[index];
-                  return ListTile(
-                      leading: Icon(menu.icon), title: Text(menu.nome));
-                },
-                itemCount: 3),
-            Divider(),
-            ListView.builder(
-                shrinkWrap: true,
-                physics: ClampingScrollPhysics(),
-                itemBuilder: (context, index) {
-                  final menu = menuItems[index + 3];
-                  return ListTile(
-                      leading: Icon(menu.icon), title: Text(menu.nome));
-                },
-                itemCount: 6),
-          ],
+          ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {},
+            backgroundColor: Color(0xFF527da3),
+            child: Icon(
+              Icons.edit,
+            ),
+          ),
+          body: Talks(),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        backgroundColor: Color(0xFF527da3),
-        child: Icon(
-          Icons.edit,
-        ),
-      ),
-      body: Talks(),
+        CodeviewPage(filePath: 'lib/layouts/telegram/telegram_layout.dart', pageController: pageController,)
+      ],
     );
   }
 }

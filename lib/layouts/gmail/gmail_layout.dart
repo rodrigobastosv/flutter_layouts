@@ -1,112 +1,120 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:flutter_layouts/components/codeview_page.dart';
 
 import 'emails.dart';
 
 class GmailLayout extends StatelessWidget {
   final scaffolfKey = GlobalKey<ScaffoldState>();
+  final pageController = PageController();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: scaffolfKey,
-      drawer: Drawer(
-        child: GmailDrawer(),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        backgroundColor: Colors.white,
-        child: CircleAvatar(
-          backgroundImage: AssetImage('assets/add_email_icon.png'),
-        ),
-      ),
-      backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        child: SafeArea(
-          child: Column(
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(16),
-                child: Card(
-                  elevation: 3,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(width: 1, color: Colors.grey),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    height: 60,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.only(left: 8),
-                          child: Row(
-                            children: <Widget>[
-                              GestureDetector(
-                                onTap: () =>
-                                    scaffolfKey.currentState.openDrawer(),
-                                child: Icon(Icons.menu),
-                              ),
-                              SizedBox(width: 10),
-                              Text(
-                                'Procurar e-mail',
-                                style: TextStyle(fontSize: 18),
-                              ),
-                            ],
-                          ),
+    return PageView(
+      controller: pageController,
+      children: <Widget>[
+        Scaffold(
+          key: scaffolfKey,
+          drawer: Drawer(
+            child: GmailDrawer(),
+          ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {},
+            backgroundColor: Colors.white,
+            child: CircleAvatar(
+              backgroundImage: AssetImage('assets/add_email_icon.png'),
+            ),
+          ),
+          backgroundColor: Colors.white,
+          body: SingleChildScrollView(
+            child: SafeArea(
+              child: Column(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Card(
+                      elevation: 3,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          border: Border.all(width: 1, color: Colors.grey),
+                          borderRadius: BorderRadius.circular(8),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(right: 8),
-                          child: CircleAvatar(
-                            backgroundImage: AssetImage('assets/rod.jpeg'),
-                            radius: 16,
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 18),
-                child: Text(
-                  'PRINCIPAL',
-                  style: TextStyle(letterSpacing: 1.7),
-                ),
-              ),
-              ListView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: emailsData.length,
-                itemBuilder: (context, index) {
-                  final email = emailsData[index];
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                    child: ListTile(
-                      leading: CircleAvatar(
-                        backgroundColor: email.avatarColor,
-                        child: Center(
-                          child: Text(email.avatarText, style: TextStyle(color: Colors.white),),
+                        height: 60,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.only(left: 8),
+                              child: Row(
+                                children: <Widget>[
+                                  GestureDetector(
+                                    onTap: () =>
+                                        scaffolfKey.currentState.openDrawer(),
+                                    child: Icon(Icons.menu),
+                                  ),
+                                  SizedBox(width: 10),
+                                  Text(
+                                    'Procurar e-mail',
+                                    style: TextStyle(fontSize: 18),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(right: 8),
+                              child: CircleAvatar(
+                                backgroundImage: AssetImage('assets/rod.jpeg'),
+                                radius: 16,
+                              ),
+                            )
+                          ],
                         ),
                       ),
-                      title: Text(email.sender),
-                      subtitle: Text(email.text, overflow: TextOverflow.ellipsis,),
-                      trailing: Column(
-                        children: <Widget>[
-                          Text(email.time),
-                          SizedBox(height: 8),
-                          email.isStarred ? Icon(Icons.star, color: Colors.yellow,) : Icon(Icons.star_border, color: Colors.grey),
-                        ],
-                      )
                     ),
-                  );
-                },
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 18),
+                    child: Text(
+                      'PRINCIPAL',
+                      style: TextStyle(letterSpacing: 1.7),
+                    ),
+                  ),
+                  ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: emailsData.length,
+                    itemBuilder: (context, index) {
+                      final email = emailsData[index];
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                        child: ListTile(
+                            leading: CircleAvatar(
+                              backgroundColor: email.avatarColor,
+                              child: Center(
+                                child: Text(email.avatarText, style: TextStyle(color: Colors.white),),
+                              ),
+                            ),
+                            title: Text(email.sender),
+                            subtitle: Text(email.text, overflow: TextOverflow.ellipsis,),
+                            trailing: Column(
+                              children: <Widget>[
+                                Text(email.time),
+                                SizedBox(height: 8),
+                                email.isStarred ? Icon(Icons.star, color: Colors.yellow,) : Icon(Icons.star_border, color: Colors.grey),
+                              ],
+                            )
+                        ),
+                      );
+                    },
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         ),
-      ),
+        CodeviewPage(filePath: 'lib/layouts/gmail/gmail_layout.dart', pageController: pageController)
+      ],
     );
   }
 }

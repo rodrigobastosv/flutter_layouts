@@ -2,6 +2,7 @@ import 'package:flutter_layouts/layouts/nubank/nubank_layout.dart';
 import 'package:flutter_layouts/layouts/whatsapp/whatsapp_layout.dart';
 
 import 'layouts/gmail/gmail_layout.dart';
+import 'layouts/itau/itau_layout.dart';
 import 'layouts/telegram/telegram_layout.dart';
 
 final layouts = [
@@ -20,5 +21,9 @@ final layouts = [
   {
     'icon': 'assets/gmail_logo.jpeg',
     'layout': GmailLayout()
+  },
+  {
+    'icon': 'assets/logo_itau.png',
+    'layout': ItauLayout()
   },
 ];
